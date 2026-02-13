@@ -1,5 +1,14 @@
-import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useRef, useState } from "react";
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { BigBoxIcon, CartIcon, CashRegisterIcon, TruckIcon } from "./icons";
 import { ProgressIndicator } from "./ProgressIndicator";
 
@@ -35,31 +44,62 @@ const data = [
 ];
 
 export function OnboardingLayout() {
+  const { width } = useWindowDimensions();
+  const adjustedWidth = width - 40;
   const steps = data.length;
   const [currentStep, setCurrentStep] = useState(1);
-  const [activeData, setActiveData] = useState(data[0]);
+  const flatListRef = useRef<FlatList>(null);
 
   function handleNext() {
     if (currentStep < steps) {
+      flatListRef.current?.scrollToIndex({
+        index: currentStep,
+        animated: true,
+      });
       setCurrentStep(currentStep + 1);
-      setActiveData(data[currentStep]);
     }
   }
 
   function handleSkip() {
+    flatListRef.current?.scrollToIndex({
+      index: steps - 1,
+      animated: true,
+    });
     setCurrentStep(steps);
-    setActiveData(data[steps - 1]);
   }
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const scrollOffset = event.nativeEvent.contentOffset.x;
+    const pageIndex = Math.round(scrollOffset / adjustedWidth);
+    setCurrentStep(pageIndex + 1);
+  };
 
   return (
     <View style={styles.container}>
       <ProgressIndicator steps={steps} currentStep={currentStep} />
 
-      <View style={styles.contentContainer}>
-        {activeData.icon}
-        <Text style={styles.header}>{activeData.header}</Text>
-        <Text style={styles.description}>{activeData.description}</Text>
-      </View>
+      <FlatList
+        ref={flatListRef}
+        data={data}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={handleScroll}
+        keyExtractor={(item) => item.step.toString()}
+        getItemLayout={(_, index) => ({
+          length: adjustedWidth,
+          offset: adjustedWidth * index,
+          index,
+        })}
+        renderItem={({ item }) => (
+          <View style={[styles.contentContainer, { width: adjustedWidth }]}>
+            {item.icon}
+            <Text style={styles.header}>{item.header}</Text>
+            <Text style={styles.description}>{item.description}</Text>
+          </View>
+        )}
+        style={{ flex: 1 }}
+      />
 
       <View style={styles.ctaGroup}>
         {currentStep !== steps ? (
