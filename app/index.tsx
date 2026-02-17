@@ -1,7 +1,7 @@
 import { OnboardingLayout, SplashScreen } from "@/components";
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 export default function HomeScreen() {
   const [ready, setReady] = useState(false);
@@ -26,18 +26,7 @@ export default function HomeScreen() {
     return <SplashScreen />;
   }
 
-  return (
-    <View style={styles.container}>
-      <OnboardingLayout />
-    </View>
-  );
+  return <OnboardingLayout />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});

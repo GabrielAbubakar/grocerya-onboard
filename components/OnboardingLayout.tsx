@@ -1,16 +1,16 @@
+import { router } from "expo-router";
 import { useRef, useState } from "react";
 import {
   FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
 import { BigBoxIcon, CartIcon, CashRegisterIcon, TruckIcon } from "./icons";
 import { ProgressIndicator } from "./ProgressIndicator";
+import { BaseButton, BaseText } from "./ui";
 
 const data = [
   {
@@ -94,8 +94,12 @@ export function OnboardingLayout() {
         renderItem={({ item }) => (
           <View style={[styles.contentContainer, { width: adjustedWidth }]}>
             {item.icon}
-            <Text style={styles.header}>{item.header}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+            <BaseText variant="bold" size="xl" textAlign="center">
+              {item.header}
+            </BaseText>
+            <BaseText color="#777777" textAlign="center">
+              {item.description}
+            </BaseText>
           </View>
         )}
         style={{ flex: 1 }}
@@ -104,23 +108,26 @@ export function OnboardingLayout() {
       <View style={styles.ctaGroup}>
         {currentStep !== steps ? (
           <>
-            <TouchableOpacity
-              style={[styles.button, styles.skipButton]}
+            <BaseButton
+              variant="secondary"
+              title="Skip"
               onPress={handleSkip}
-            >
-              <Text style={styles.skipButtonText}>Skip</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.nextButton]}
+              style={styles.button}
+            />
+            <BaseButton
+              variant="primary"
+              title="Next"
               onPress={handleNext}
-            >
-              <Text style={styles.nextButtonText}>Next</Text>
-            </TouchableOpacity>
+              style={styles.button}
+            />
           </>
         ) : (
-          <TouchableOpacity style={[styles.button, styles.nextButton]}>
-            <Text style={styles.nextButtonText}>Get Started</Text>
-          </TouchableOpacity>
+          <BaseButton
+            variant="primary"
+            title="Get Started"
+            onPress={() => router.push("/login")}
+            style={styles.button}
+          />
         )}
       </View>
     </View>
@@ -140,17 +147,6 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingHorizontal: 20,
   },
-  header: {
-    textAlign: "center",
-    fontFamily: "Poppins-Bold",
-    fontSize: 20,
-    color: "#0d0d0d",
-  },
-  description: {
-    textAlign: "center",
-    fontFamily: "Poppins-Regular",
-    color: "#777777",
-  },
   ctaGroup: {
     flexDirection: "row",
     gap: 20,
@@ -158,25 +154,5 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    padding: 10,
-    borderRadius: 30,
-  },
-  skipButton: {
-    flex: 1,
-    backgroundColor: "#f2f2f3",
-  },
-  skipButtonText: {
-    textAlign: "center",
-    color: "#777777",
-    fontFamily: "Poppins-Medium",
-  },
-  nextButton: {
-    flex: 1,
-    backgroundColor: "#0d0d0d",
-  },
-  nextButtonText: {
-    textAlign: "center",
-    color: "#ffffff",
-    fontFamily: "Poppins-Medium",
   },
 });
