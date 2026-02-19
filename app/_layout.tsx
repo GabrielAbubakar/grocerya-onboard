@@ -4,7 +4,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -20,13 +19,26 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(auth)/select-category"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="(auth)/set-location"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="(auth)/enable-notifications"
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="modal"
           options={{ presentation: "modal", title: "Modal" }}
         />
       </Stack>
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" backgroundColor="#0d0d0d" /> */}
     </ThemeProvider>
   );
 }

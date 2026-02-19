@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import {
   FlatList,
@@ -76,6 +77,7 @@ export function OnboardingLayout() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" backgroundColor="white" />
       <ProgressIndicator steps={steps} currentStep={currentStep} />
 
       <FlatList
@@ -125,7 +127,7 @@ export function OnboardingLayout() {
           <BaseButton
             variant="primary"
             title="Get Started"
-            onPress={() => router.push("/login")}
+            onPress={() => router.push("/(auth)/login")}
             style={styles.button}
           />
         )}
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     padding: 20,
+    backgroundColor: "white",
   },
   contentContainer: {
     flex: 1,

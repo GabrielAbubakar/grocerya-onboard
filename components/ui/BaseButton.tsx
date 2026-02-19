@@ -1,4 +1,4 @@
-import { fontFamily, fontSize } from "@/constants";
+import { Colors, fontFamily, fontSize } from "@/constants";
 import {
   StyleSheet,
   Text,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   secondaryText: {
-    color: "#777777",
+    color: Colors.light.text,
   },
   disabledText: {
     color: "#888888",
