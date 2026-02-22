@@ -1,10 +1,17 @@
-import { BaseButton, BaseText, TopBar } from "@/components";
+import { BaseButton, BaseText, OTPInput, TopBar } from "@/components";
 import { Colors } from "@/constants";
 import { router } from "expo-router";
-import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
+import { useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function OTP() {
+  const [code, setCode] = useState("");
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -18,13 +25,16 @@ export default function OTP() {
           Enter your OTP number{" "}
         </BaseText>
         <BaseText style={styles.subTitle} color={Colors.light.textSecondary}>
-          We’ve sent the OTP number via sms to{" "}
+          We&apos;ve sent the OTP number via sms to{" "}
           <BaseText variant="bold">+62 888 1234 5678</BaseText>
         </BaseText>
+
+        <OTPInput length={5} onCodeChanged={setCode} />
 
         <BaseButton
           style={styles.button}
           title="Continue"
+          disabled={code.length !== 5}
           onPress={() => router.push("/(auth)/select-category")}
         />
 
@@ -50,6 +60,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   subTitle: {
+    marginBottom: 24,
+  },
+  resendContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 24,
   },
   button: {

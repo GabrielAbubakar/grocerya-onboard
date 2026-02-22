@@ -33,10 +33,6 @@ export default function RootLayout() {
           name="(auth)/enable-notifications"
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="modal"
-          options={{ presentation: "modal", title: "Modal" }}
-        />
       </Stack>
       {/* <StatusBar style="auto" backgroundColor="#0d0d0d" /> */}
     </ThemeProvider>

@@ -1,5 +1,6 @@
-import { BaseButton, BaseText, TopBar } from "@/components";
+import { BaseButton, BaseText, CountryPickerModal, TopBar } from "@/components";
 import { Colors } from "@/constants";
+import { countries } from "@/constants/Countries";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -7,12 +8,15 @@ import {
   Platform,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Algeria is +213
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +39,11 @@ export default function Login() {
         </BaseText>
 
         <View style={styles.inputContainer}>
-          <BaseText style={styles.countryCode}>+213</BaseText>
+          <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+            <BaseText style={styles.countryCode}>
+              {selectedCountry.flag} {selectedCountry.dial_code}
+            </BaseText>
+          </TouchableOpacity>
 
           <TextInput
             placeholder="Phone Number"
@@ -50,6 +58,13 @@ export default function Login() {
           style={styles.button}
           title="Continue"
           onPress={() => router.push("/(auth)/otp")}
+        />
+
+        <CountryPickerModal
+          visible={isModalVisible}
+          onClose={() => setIsModalVisible(false)}
+          onSelect={setSelectedCountry}
+          selectedCountry={selectedCountry}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
