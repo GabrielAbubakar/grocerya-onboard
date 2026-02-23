@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import {
   FlatList,
@@ -49,6 +50,7 @@ export function OnboardingLayout() {
   const steps = data.length;
   const [currentStep, setCurrentStep] = useState(1);
   const flatListRef = useRef<FlatList>(null);
+  const navigation = useNavigation();
 
   function handleNext() {
     if (currentStep < steps) {
@@ -118,7 +120,12 @@ export function OnboardingLayout() {
             </TouchableOpacity>
           </>
         ) : (
-          <TouchableOpacity style={[styles.button, styles.nextButton]}>
+          <TouchableOpacity
+            style={[styles.button, styles.nextButton]}
+            onPress={() => {
+              navigation.navigate("HomeTabGroup");
+            }}
+          >
             <Text style={styles.nextButtonText}>Get Started</Text>
           </TouchableOpacity>
         )}
