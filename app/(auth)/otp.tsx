@@ -1,55 +1,45 @@
 import { BaseButton, BaseText, OTPInput, TopBar } from "@/components";
+import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
 import { router } from "expo-router";
 import { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
 
 export default function OTP() {
   const [code, setCode] = useState("");
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 44 : 10}
-      >
-        <TopBar backPress={() => router.back()} />
+    <ScreenLayout>
+      <TopBar backPress={() => router.back()} />
 
-        <BaseText variant="bold" size="xl">
-          Enter your OTP number{" "}
+      <BaseText variant="bold" size="xl">
+        Enter your OTP number{" "}
+      </BaseText>
+      <BaseText style={styles.subTitle} color={Colors.light.textSecondary}>
+        We&apos;ve sent the OTP number via sms to{" "}
+        <BaseText variant="bold">+62 888 1234 5678</BaseText>
+      </BaseText>
+
+      <OTPInput length={5} onCodeChanged={setCode} />
+
+      <BaseButton
+        style={styles.button}
+        title="Continue"
+        disabled={code.length !== 5}
+        onPress={() => router.push("/(auth)/select-category")}
+      />
+
+      <BaseText size="xs" style={styles.terms}>
+        By clicking, I accept the{" "}
+        <BaseText size="xs" variant="bold">
+          Terms and Conditions
+        </BaseText>{" "}
+        &{" "}
+        <BaseText size="xs" variant="bold">
+          Privacy Policy
         </BaseText>
-        <BaseText style={styles.subTitle} color={Colors.light.textSecondary}>
-          We&apos;ve sent the OTP number via sms to{" "}
-          <BaseText variant="bold">+62 888 1234 5678</BaseText>
-        </BaseText>
-
-        <OTPInput length={5} onCodeChanged={setCode} />
-
-        <BaseButton
-          style={styles.button}
-          title="Continue"
-          disabled={code.length !== 5}
-          onPress={() => router.push("/(auth)/select-category")}
-        />
-
-        <BaseText size="xs" style={styles.terms}>
-          By clicking, I accept the{" "}
-          <BaseText size="xs" variant="bold">
-            Terms and Conditions
-          </BaseText>{" "}
-          &{" "}
-          <BaseText size="xs" variant="bold">
-            Privacy Policy
-          </BaseText>
-        </BaseText>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      </BaseText>
+    </ScreenLayout>
   );
 }
 

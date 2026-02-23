@@ -34,7 +34,6 @@ export default function RootLayout() {
           options={{ headerShown: false }}
         />
       </Stack>
-      {/* <StatusBar style="auto" backgroundColor="#0d0d0d" /> */}
     </ThemeProvider>
   );
 }

@@ -1,41 +1,35 @@
 import { BaseButton, BaseText, TopBar } from "@/components";
 import { MapIcon } from "@/components/icons";
+import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
 import { router } from "expo-router";
-import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, View } from "react-native";
 
 export default function SetLocation() {
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 44 : 10}
-      >
-        <TopBar backPress={() => router.back()} />
+    <ScreenLayout>
+      <TopBar backPress={() => router.back()} />
 
-        <View style={styles.mapContainer}>
-          <MapIcon width={260} height={260} />
-        </View>
+      <View style={styles.mapContainer}>
+        <MapIcon width={260} height={260} />
+      </View>
 
-        <BaseText variant="bold" size="xl" style={styles.title}>
-          Set your location
-        </BaseText>
+      <BaseText variant="bold" size="xl" style={styles.title}>
+        Set your location
+      </BaseText>
 
-        <BaseText color={Colors.light.textSecondary} style={styles.subTitle}>
-          This let us know your location for best shipping experience
-        </BaseText>
+      <BaseText color={Colors.light.textSecondary} style={styles.subTitle}>
+        This let us know your location for best shipping experience
+      </BaseText>
 
-        <View style={styles.buttonContainer}>
-          <BaseButton
-            title="Allow Google Maps"
-            onPress={() => router.push("/enable-notifications")}
-          />
-          <BaseButton title="Set Manually" variant="secondary" />
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      <View style={styles.buttonContainer}>
+        <BaseButton
+          title="Allow Google Maps"
+          onPress={() => router.push("/enable-notifications")}
+        />
+        <BaseButton title="Set Manually" variant="secondary" />
+      </View>
+    </ScreenLayout>
   );
 }
 
