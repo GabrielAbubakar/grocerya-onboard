@@ -1,5 +1,5 @@
 export { CartScreen } from "./CartScreen";
-export { FavoritesScreen } from "./FavoritesScreen";
+export { FavoriteScreen } from "./FavoriteScreen";
 export { HomeScreen } from "./HomeScreen";
 export { ProfileScreen } from "./ProfileScreen";
 
