@@ -8,32 +8,26 @@ import { Text } from "react-native";
 import { BagIcon, HomeIcon, SaveIcon, UserIcon } from "./components/icons";
 import { IndexScreen } from "./screens";
 import {
+  EnableNotifications,
+  Login,
+  OTP,
+  SelectCategory,
+  SetLocation,
+} from "./screens/authScreens";
+import {
   CartScreen,
   FavoriteScreen,
   HomeScreen,
   ProfileScreen,
 } from "./screens/tabScreens";
-
-export type RootStackParamList = {
-  Index: undefined;
-  HomeTabGroup: undefined;
-};
-
-export type HomeTabParamList = {
-  Home: undefined;
-  Cart: undefined;
-  Favorite: undefined;
-  Profile: undefined;
-};
-
-declare global {
-  namespace ReactNavigation {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface RootParamList extends RootStackParamList {}
-  }
-}
+import {
+  AuthStackParamList,
+  HomeTabParamList,
+  RootStackParamList,
+} from "./types/stacks";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 // function DrawerGroup() {
@@ -108,6 +102,21 @@ function HomeTabGroup() {
   );
 }
 
+function AuthGroup() {
+  return (
+    <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+      <AuthStack.Screen name="Login" component={Login} />
+      <AuthStack.Screen name="OTP" component={OTP} />
+      <AuthStack.Screen name="SelectCategory" component={SelectCategory} />
+      <AuthStack.Screen name="SetLocation" component={SetLocation} />
+      <AuthStack.Screen
+        name="EnableNotifications"
+        component={EnableNotifications}
+      />
+    </AuthStack.Navigator>
+  );
+}
+
 export default function Navigator() {
   return (
     <NavigationContainer>
@@ -115,6 +124,7 @@ export default function Navigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Index" component={IndexScreen} />
         <Stack.Screen name="HomeTabGroup" component={HomeTabGroup} />
+        <Stack.Screen name="AuthGroup" component={AuthGroup} />
       </Stack.Navigator>
     </NavigationContainer>
   );

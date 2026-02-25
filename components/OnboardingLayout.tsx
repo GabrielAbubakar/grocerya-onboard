@@ -128,7 +128,7 @@ export function OnboardingLayout() {
           <BaseButton
             variant="primary"
             title="Get Started"
-            onPress={() => navigation.navigate("HomeTabGroup")}
+            onPress={() => navigation.navigate("AuthGroup")}
             style={styles.button}
           />
         )}
