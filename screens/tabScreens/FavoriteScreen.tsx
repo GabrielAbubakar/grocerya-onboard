@@ -1,15 +1,19 @@
+import { MainHeader, ScreenLayout } from "@/components";
 import { StyleSheet, Text, View } from "react-native";
 
 export function FavoriteScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Favorite Screen</Text>
-    </View>
+    <ScreenLayout>
+      <MainHeader />
+      <View style={styles.content}>
+        <Text>Favorite Screen</Text>
+      </View>
+    </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

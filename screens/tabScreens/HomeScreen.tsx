@@ -1,15 +1,19 @@
+import { MainHeader, ScreenLayout } from "@/components";
 import { StyleSheet, Text, View } from "react-native";
 
 export function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-    </View>
+    <ScreenLayout>
+      <MainHeader />
+      <View style={styles.content}>
+        <Text>Home Screen</Text>
+      </View>
+    </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

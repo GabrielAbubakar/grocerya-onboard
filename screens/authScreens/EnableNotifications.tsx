@@ -1,6 +1,5 @@
-import { BaseButton, BaseText, TopBar } from "@/components";
+import { BaseButton, BaseText, ScreenLayout, TopBar } from "@/components";
 import { PhoneIcon } from "@/components/icons";
-import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
@@ -27,7 +26,12 @@ export function EnableNotifications() {
       <View style={styles.buttonContainer}>
         <BaseButton
           title="Enable Notifications"
-          onPress={() => navigation.navigate("HomeTabGroup")}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "DrawerGroup" }],
+            })
+          }
         />
         <BaseButton title="Skip for Now" variant="secondary" />
       </View>

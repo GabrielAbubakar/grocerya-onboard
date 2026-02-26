@@ -2,12 +2,18 @@ import { BaseButton, BaseText, OTPInput, TopBar } from "@/components";
 import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { Keyboard, StyleSheet } from "react-native";
 
 export function OTP() {
   const navigation = useNavigation();
   const [code, setCode] = useState("");
+
+  useEffect(() => {
+    if (code.length === 5) {
+      Keyboard.dismiss();
+    }
+  }, [code]);
 
   return (
     <ScreenLayout>
