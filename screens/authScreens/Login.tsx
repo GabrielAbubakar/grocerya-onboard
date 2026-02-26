@@ -2,11 +2,12 @@ import { BaseButton, BaseText, CountryPickerModal, TopBar } from "@/components";
 import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
 import { countries } from "@/constants/Countries";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function Login() {
+export function Login() {
+  const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Algeria is +213
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,7 +46,7 @@ export default function Login() {
       <BaseButton
         style={styles.button}
         title="Continue"
-        onPress={() => router.push("/(auth)/otp")}
+        onPress={() => navigation.navigate("OTP")}
       />
 
       <CountryPickerModal

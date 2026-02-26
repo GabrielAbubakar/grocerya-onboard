@@ -1,8 +1,7 @@
 import { OnboardingLayout } from "@/components";
 import { useFonts } from "expo-font";
-import { StyleSheet } from "react-native";
 
-export default function HomeScreen() {
+export function IndexScreen() {
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins/Poppins-Medium.ttf"),
@@ -16,5 +15,3 @@ export default function HomeScreen() {
 
   return <OnboardingLayout />;
 }
-
-const styles = StyleSheet.create({});
