@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { useRef, useState } from "react";
 import {
@@ -50,6 +50,7 @@ export function OnboardingLayout() {
   const steps = data.length;
   const [currentStep, setCurrentStep] = useState(1);
   const flatListRef = useRef<FlatList>(null);
+  const navigation = useNavigation();
 
   function handleNext() {
     if (currentStep < steps) {
@@ -127,7 +128,7 @@ export function OnboardingLayout() {
           <BaseButton
             variant="primary"
             title="Get Started"
-            onPress={() => router.push("/(auth)/login")}
+            onPress={() => navigation.navigate("AuthGroup")}
             style={styles.button}
           />
         )}

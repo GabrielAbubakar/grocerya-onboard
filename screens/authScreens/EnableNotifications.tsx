@@ -1,14 +1,14 @@
-import { BaseButton, BaseText, TopBar } from "@/components";
+import { BaseButton, BaseText, ScreenLayout, TopBar } from "@/components";
 import { PhoneIcon } from "@/components/icons";
-import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 
-export default function EnableNotifications() {
+export function EnableNotifications() {
+  const navigation = useNavigation();
   return (
     <ScreenLayout>
-      <TopBar backPress={() => router.back()} />
+      <TopBar backPress={() => navigation.goBack()} />
 
       <BaseText variant="bold" size="xl">
         Lastly, please enable notification
@@ -24,7 +24,15 @@ export default function EnableNotifications() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <BaseButton title="Enable Notifications" />
+        <BaseButton
+          title="Enable Notifications"
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "DrawerGroup" }],
+            })
+          }
+        />
         <BaseButton title="Skip for Now" variant="secondary" />
       </View>
     </ScreenLayout>

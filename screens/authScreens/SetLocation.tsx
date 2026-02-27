@@ -2,13 +2,14 @@ import { BaseButton, BaseText, TopBar } from "@/components";
 import { MapIcon } from "@/components/icons";
 import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 
-export default function SetLocation() {
+export function SetLocation() {
+  const navigation = useNavigation();
   return (
     <ScreenLayout>
-      <TopBar backPress={() => router.back()} />
+      <TopBar backPress={() => navigation.goBack()} />
 
       <View style={styles.mapContainer}>
         <MapIcon width={260} height={260} />
@@ -25,7 +26,7 @@ export default function SetLocation() {
       <View style={styles.buttonContainer}>
         <BaseButton
           title="Allow Google Maps"
-          onPress={() => router.push("/enable-notifications")}
+          onPress={() => navigation.navigate("EnableNotifications")}
         />
         <BaseButton title="Set Manually" variant="secondary" />
       </View>
