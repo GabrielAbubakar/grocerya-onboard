@@ -1,18 +1,19 @@
 import { BaseButton, BaseText, TopBar } from "@/components";
 import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Categories, Colors } from "@/constants";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-export default function SelectCategory() {
+export function SelectCategory() {
+  const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     Categories[0],
   );
 
   return (
     <ScreenLayout>
-      <TopBar backPress={() => router.back()} />
+      <TopBar backPress={() => navigation.goBack()} />
 
       <BaseText variant="bold" size="xl">
         All your grocery needs in one place
@@ -39,7 +40,7 @@ export default function SelectCategory() {
       <BaseButton
         style={styles.button}
         title="Continue"
-        onPress={() => router.push("/(auth)/set-location")}
+        onPress={() => navigation.navigate("SetLocation")}
       />
     </ScreenLayout>
   );

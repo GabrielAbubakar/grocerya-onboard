@@ -1,16 +1,23 @@
 import { BaseButton, BaseText, OTPInput, TopBar } from "@/components";
 import { ScreenLayout } from "@/components/ui/ScreenLayout";
 import { Colors } from "@/constants";
-import { router } from "expo-router";
-import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { Keyboard, StyleSheet } from "react-native";
 
-export default function OTP() {
+export function OTP() {
+  const navigation = useNavigation();
   const [code, setCode] = useState("");
+
+  useEffect(() => {
+    if (code.length === 5) {
+      Keyboard.dismiss();
+    }
+  }, [code]);
 
   return (
     <ScreenLayout>
-      <TopBar backPress={() => router.back()} />
+      <TopBar backPress={() => navigation.goBack()} />
 
       <BaseText variant="bold" size="xl">
         Enter your OTP number{" "}
@@ -26,7 +33,7 @@ export default function OTP() {
         style={styles.button}
         title="Continue"
         disabled={code.length !== 5}
-        onPress={() => router.push("/(auth)/select-category")}
+        onPress={() => navigation.navigate("SelectCategory")}
       />
 
       <BaseText size="xs" style={styles.terms}>
