@@ -13,7 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [
     Linking.createURL("/"),
     "https://app.example.com",
-    // "groceryaonboard://", // Or `Linking.createURL('/')` for Expo apps
+    // "groceryaonboard://profile", // Or `Linking.createURL('/')` for Expo apps
   ],
   config: {
     screens: {
