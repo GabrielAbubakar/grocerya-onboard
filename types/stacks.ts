@@ -1,12 +1,14 @@
+import { NavigatorScreenParams } from "@react-navigation/native";
+
 export type RootStackParamList = {
   Index: undefined;
-  HomeTabGroup: undefined;
-  DrawerGroup: undefined;
-  AuthGroup: undefined;
+  DrawerGroup: NavigatorScreenParams<DrawerParamList>;
+  AuthGroup: NavigatorScreenParams<AuthStackParamList>;
 };
 
 export type AuthStackParamList = {
   Login: undefined;
+  Register: undefined;
   OTP: undefined;
   SelectCategory: undefined;
   SetLocation: undefined;
@@ -21,7 +23,7 @@ export type HomeTabParamList = {
 };
 
 export type DrawerParamList = {
-  Home: undefined;
+  HomeTabGroup: NavigatorScreenParams<HomeTabParamList>;
   Cart: undefined;
   Favorite: undefined;
   Profile: undefined;

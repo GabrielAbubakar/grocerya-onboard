@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "groceryaonboard",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/Logo.png",
       "imageWidth": 200,
@@ -15,7 +14,11 @@
       "backgroundColor": "#0d0d0d"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "associatedDomains": ["applinks:app.example.com"],
+      "entitlements": {
+        "com.apple.developer.associated-domains": ["applinks:app.example.com"]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +27,19 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "app.example.com"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "predictiveBackGestureEnabled": false,
       "package": "com.gabrielabubakar.groceryaonboard"
     },
