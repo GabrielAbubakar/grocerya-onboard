@@ -10,11 +10,7 @@ import { IndexScreen } from "./screens";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [
-    Linking.createURL("/"),
-    "https://app.example.com",
-    // "groceryaonboard://profile", // Or `Linking.createURL('/')` for Expo apps
-  ],
+  prefixes: [Linking.createURL("/")],
   config: {
     screens: {
       Index: "",

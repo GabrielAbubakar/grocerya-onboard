@@ -1,7 +1,11 @@
 import { MainHeader, ScreenLayout } from "@/components";
 import { StyleSheet, Text, View } from "react-native";
 
-export function ProfileScreen({ route }: { route: any }) {
+export function ProfileScreen({
+  route,
+}: {
+  route: { params: { name: string; email: string } };
+}) {
   const params = route.params;
 
   return (
